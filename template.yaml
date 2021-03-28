@@ -1,6 +1,22 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: An AWS serverless app that provides a sentiment analysis capability to Quickbase.
+Description: An app that provides a sentiment analysis capability to Quickbase through Pipelines.
+
+Metadata:
+  AWS::ServerlessRepo::Application:
+    Name: quickbase-sentiment-analysis
+    Description: An app that provides a sentiment analysis capability to Quickbase through Pipelines.
+    Author: Chris Pliakas
+    SpdxLicenseId: MIT
+    LicenseUrl: LICENSE.txt
+    ReadmeUrl: README.md
+    Labels:
+      - quickbase
+      - sentiment
+      - comprehend
+    HomePageUrl: https://github.com/cpliakas/quickbase-sentiment-analysis
+    SemanticVersion: 0.1.0
+    SourceCodeUrl: https://github.com/cpliakas/quickbase-sentiment-analysis
 
 Parameters:
 

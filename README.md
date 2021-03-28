@@ -1,6 +1,6 @@
 # Quickbase Sentiment Analysis
 
-The project provides a sentiment analysis capability to [Quickbase](https://www.quickbase.com/) through [Pipelines](https://help.quickbase.com/pipelines/about_quick_base_pipelines.html) and an AWS serverless application.
+An AWS serverless app that provides a sentiment analysis capability to [Quickbase](https://www.quickbase.com/) through [Pipelines](https://help.quickbase.com/pipelines/about_quick_base_pipelines.html).
 
 ## Installation
 
@@ -30,11 +30,12 @@ TODO
 
 ### API Only
 
-The serverless app accepts a POST request to `/` with the following payload:
+The serverless app accepts a `POST` request to the `/` endpoint with the following payload:
 
 ```json
 {
-    "text": "This is a simple but useful application."
+    "text": "This is a simple but useful application.",
+    "language": "en"
 }
 ```
 

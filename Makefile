@@ -2,7 +2,7 @@
 # The default values should allow you to create a development stack.
 APP_NAME ?= quickbase-sentiment-analysis
 APP_STAGE ?= $(USER)
-AWS_REGION ?= $(aws configure get region)
+AWS_REGION ?= $(shell aws configure get region)
 AUTH_STACK_NAME ?= $(APP_NAME)-$(APP_STAGE)
 
 # Common values used throughout the Makefile, not intended to be configured.
@@ -31,6 +31,10 @@ package:
 .PHONY: deploy
 deploy: package
 	sam deploy --template-file $(PACKAGED_TEMPLATE) --stack-name $(STACK_NAME) --capabilities CAPABILITY_IAM --parameter-overrides $(TEMPLATE_PARAMS)
+
+.PHONY: publish
+publish: package
+	sam publish --template $(PACKAGED_TEMPLATE) --region $(AWS_REGION)
 
 .PHONY: teardown
 teardown:
