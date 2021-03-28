@@ -70,6 +70,8 @@ Resources:
       CodeUri: function/
       Handler: index.handler
       Runtime: nodejs14.x
+      Policies:
+        - ComprehendBasicAccessPolicy: {}
       Events:
         DetectSentiment:
           Type: Api
@@ -87,6 +89,10 @@ Outputs:
   TokenEndpoint:
     Description: "Cognito endpoint URL to get an access token"
     Value: !Sub "https://${Domain}.auth.${AWS::Region}.amazoncognito.com/oauth2/token"
+
+  UserPoolId:
+    Description: "Cognito User Pool ID"
+    Value: !Ref UserPoolPipelines
 
   UserPoolClientId:
     Description: "Cognito User Pool Client ID that defines the Client ID and Client Secret"
