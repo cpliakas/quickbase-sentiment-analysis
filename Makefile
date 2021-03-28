@@ -42,5 +42,4 @@ teardown:
 
 .PHONY: clean
 clean:
-	rm -f env.json
 	rm -f $(PACKAGED_TEMPLATE)

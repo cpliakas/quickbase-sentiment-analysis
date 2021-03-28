@@ -68,7 +68,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: handler/
-      Handler: app.lambdaHandler
+      Handler: app.handler
       Runtime: nodejs14.x
       Events:
         Root:

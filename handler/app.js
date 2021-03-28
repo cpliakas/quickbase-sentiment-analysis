@@ -1,4 +1,5 @@
-let response;
+var AWS = require('aws-sdk');
+var comprehend = new AWS.Comprehend();
 
 /**
  *
@@ -12,20 +13,48 @@ let response;
  * @returns {Object} object - API Gateway Lambda Proxy Output Format
  * 
  */
-exports.lambdaHandler = async (event, context) => {
+exports.handler = async (event, context) => {
     try {
-
-        response = {
-            'statusCode': 200,
-            'body': JSON.stringify({
-                message: 'hello world',
-            })
-        }
-        
-    } catch (err) {
-        console.log(err);
-        return err;
+        let sentiment = await detectSentiment()
+        return formatResponse(serialize(sentiment))
+    } catch (error) {
+        return formatError(error)
     }
-
-    return response
 };
+
+var detectSentiment = function () {
+    params = {
+        LanguageCode: 'en',
+        Text: 'This is the best code I have ever seen.'
+    };
+    return comprehend.detectSentiment(params).promise()
+}
+
+var serialize = function (object) {
+    return JSON.stringify(object, null, 2)
+}
+
+var formatResponse = function (body) {
+    var response = {
+        "statusCode": 200,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "isBase64Encoded": false,
+        "body": body
+    }
+    return response
+}
+
+var formatError = function (error) {
+    var response = {
+        "statusCode": error.statusCode,
+        "headers": {
+            "Content-Type": "text/plain",
+            "x-amzn-ErrorType": error.code
+        },
+        "isBase64Encoded": false,
+        "body": error.code + ": " + error.message
+    }
+    return response
+}
