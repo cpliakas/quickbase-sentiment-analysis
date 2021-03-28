@@ -15,17 +15,29 @@ var comprehend = new AWS.Comprehend();
  */
 exports.handler = async (event, context) => {
     try {
-        let sentiment = await detectSentiment()
+        let body = parseBody(event)
+        let sentiment = await detectSentiment(body)
         return formatResponse(serialize(sentiment))
     } catch (error) {
         return formatError(error)
     }
 };
 
-var detectSentiment = function () {
+var parseBody = function (event) {
+    let body = JSON.parse(event.body)
+    if (!body) {
+        throw new Error("payload required")
+    }
+    if (!body.text) {
+        throw new Error("text key required in payload")
+    }
+    return body
+}
+
+var detectSentiment = function (body) {
     params = {
-        LanguageCode: 'en',
-        Text: 'This is the best code I have ever seen.'
+        LanguageCode: body.language || 'en',
+        Text: body.text
     };
     return comprehend.detectSentiment(params).promise()
 }
@@ -34,27 +46,36 @@ var serialize = function (object) {
     return JSON.stringify(object, null, 2)
 }
 
-var formatResponse = function (body) {
-    var response = {
+var formatResponse = function (response) {
+    return {
         "statusCode": 200,
         "headers": {
             "Content-Type": "application/json"
         },
         "isBase64Encoded": false,
-        "body": body
+        "body": response
     }
-    return response
 }
 
-var formatError = function (error) {
-    var response = {
-        "statusCode": error.statusCode,
-        "headers": {
-            "Content-Type": "text/plain",
-            "x-amzn-ErrorType": error.code
-        },
-        "isBase64Encoded": false,
-        "body": error.code + ": " + error.message
+var formatError = function (err) {
+    if (err.code) {
+        return {
+            "statusCode": err.statusCode,
+            "headers": {
+                "Content-Type": "application/json",
+                "x-amzn-ErrorType": err.code
+            },
+            "isBase64Encoded": false,
+            "body": JSON.stringify({Message: err.code + ": " + err.message})
+        }
+    } else {
+        return {
+            "statusCode": 400,
+            "headers": {
+                "Content-Type": "application/json",
+            },
+            "isBase64Encoded": false,
+            "body": JSON.stringify({Message: err.toString()})
+        }
     }
-    return response
 }
