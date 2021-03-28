@@ -1,0 +1,93 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Example app that Quickbase Pipelines can make authenticated requests to.
+
+Parameters:
+
+  Domain:
+    Type: String
+    AllowedPattern: ^[a-z0-9](?:[a-z0-9\-]{0,61}[a-z0-9])?$
+    Description: The Cognito User Pool domain
+
+Globals:
+  Function:
+    Timeout: 10
+
+Resources:
+
+  UserPoolPipelines:
+    Type: AWS::Cognito::UserPool
+    Properties:
+      AdminCreateUserConfig:
+        AllowAdminCreateUserOnly: true
+
+  UserPoolDomainPipelines:
+    Type: AWS::Cognito::UserPoolDomain
+    Properties:
+      Domain: !Ref Domain
+      UserPoolId: !Ref UserPoolPipelines
+
+  UserPoolResourceServerPipelines:
+    Type: AWS::Cognito::UserPoolResourceServer
+    Properties:
+      Identifier: com.quickbase
+      Name: Quickbase Pipelines
+      Scopes:
+        -
+          ScopeName: pipelines
+          ScopeDescription: Scope for resources that Quickbase Pipelines can access.
+      UserPoolId: !Ref UserPoolPipelines
+
+  UserPoolClientPipelines:
+    Type: AWS::Cognito::UserPoolClient
+    DependsOn: UserPoolResourceServerPipelines
+    Properties:
+      UserPoolId: !Ref UserPoolPipelines
+      GenerateSecret: true
+      AllowedOAuthFlowsUserPoolClient: true
+      AllowedOAuthFlows:
+        - client_credentials
+      AllowedOAuthScopes:
+        - com.quickbase/pipelines
+
+  Api:
+    Type: AWS::Serverless::Api
+    DependsOn: UserPoolResourceServerPipelines
+    Properties:
+      StageName: Prod
+      Cors: "'*'"
+      Auth:
+        DefaultAuthorizer: CognitoAuthorizer
+        Authorizers:
+          CognitoAuthorizer:
+            AuthorizationScopes:
+              - com.quickbase/pipelines
+            UserPoolArn: !GetAtt UserPoolPipelines.Arn
+
+  Function:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: handler/
+      Handler: app.lambdaHandler
+      Runtime: nodejs14.x
+      Events:
+        Root:
+          Type: Api
+          Properties:
+            RestApiId: !Ref Api
+            Path: /
+            Method: get
+
+Outputs:
+
+  ApiEndpoint:
+    Description: "API Gateway endpoint URL for Prod stage"
+    Value: !Sub "https://${Api}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+
+  TokenEndpoint:
+    Description: "Cognito endpoint URL to get an access token"
+    Value: !Sub "https://${Domain}.auth.${AWS::Region}.amazoncognito.com/oauth2/token"
+
+  UserPoolClientId:
+    Description: "Cognito User Pool Client ID that defines the Client ID and Client Secret"
+    Value: !Ref UserPoolClientPipelines

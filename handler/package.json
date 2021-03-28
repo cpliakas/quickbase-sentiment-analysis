@@ -1,0 +1,16 @@
+{
+  "name": "pipelines_example",
+  "version": "0.1.0",
+  "description": "Example app that Quickbase Pipelines can make authenticated requests to.",
+  "main": "app.js",
+  "repository": "https://github.com/awslabs/aws-sam-cli/tree/develop/samcli/local/init/templates/cookiecutter-aws-sam-hello-nodejs",
+  "author": "Quickbase, Inc.",
+  "license": "MIT",
+  "scripts": {
+    "test": "mocha tests/unit/"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.2.1"
+  }
+}
