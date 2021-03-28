@@ -14,15 +14,11 @@ TEMPLATE_PARAMS = Domain=$(STACK_NAME)
 
 .PHONY: build
 build:
-	(cd handler && npm install)
-
-.PHONY: env
-env:
-	cp env.dist.json env.json
+	(cd function && npm install)
 
 .PHONY: run
 run:
-	sam local start-api --env-vars env.json
+	sam local start-api
 
 .PHONY: code-bucket
 code-bucket:

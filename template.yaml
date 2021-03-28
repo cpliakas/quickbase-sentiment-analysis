@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: Example app that Quickbase Pipelines can make authenticated requests to.
+Description: An AWS serverless app that provides a sentiment analysis capability to Quickbase.
 
 Parameters:
 
@@ -67,16 +67,16 @@ Resources:
   Function:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: handler/
-      Handler: app.handler
+      CodeUri: function/
+      Handler: index.handler
       Runtime: nodejs14.x
       Events:
-        Root:
+        DetectSentiment:
           Type: Api
           Properties:
             RestApiId: !Ref Api
             Path: /
-            Method: get
+            Method: POST
 
 Outputs:
 
