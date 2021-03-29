@@ -15,12 +15,12 @@ The output of the Lambda function should resemble the JSON below:
 ```json
 {
   "Authentication": "OAuth 2.0 Client Credentials",
-  "Username": "6rg9jc3442gmkmhohjaav4bqll",
-  "Password": "1k23bd7nqcaq3im5lrlph7oopv3sid23t5i7aorn3ecqucgmofs0",
-  "TokenUrl": "https://my-domain-parameter.auth.us-east-2.amazoncognito.com/oauth2/token",
+  "Username": "6rg9******************bqll",
+  "Password": "1k23********************************************ofs0",
+  "TokenUrl": "https://example-domain.auth.us-east-2.amazoncognito.com/oauth2/token",
   "OauthCredentialsPlacement": "Header",
   "DisableSslCertificateValidation": "No",
-  "Url": "https://x35vz3ks74.execute-api.us-east-2.amazonaws.com/Prod/",
+  "Url": "https://abcdefghij.execute-api.us-east-2.amazonaws.com/Prod/",
   "Method": "POST",
   "BodyExample": "{{ {'text': a.textfield}|to_json }}"
 }
