@@ -23,7 +23,7 @@ Parameters:
   Domain:
     Type: String
     AllowedPattern: ^[a-z0-9](?:[a-z0-9\-]{0,61}[a-z0-9])?$
-    Description: The Cognito User Pool domain
+    Description: The Cognito User Pool domain, which is the prefix of the hostname used in the Pipelines Token URL setting.
 
 Globals:
   Function:
@@ -80,7 +80,7 @@ Resources:
               - com.quickbase/pipelines
             UserPoolArn: !GetAtt UserPoolPipelines.Arn
 
-  Function:
+  FunctionIndex:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: function/
@@ -96,7 +96,35 @@ Resources:
             Path: /
             Method: POST
 
+  FunctionMetadata:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: function/
+      Handler: metadata.handler
+      Runtime: nodejs14.x
+      Policies:
+        - Statement:
+          - Sid: CognitoIdpAccess
+            Effect: Allow
+            Action:
+            - cognito-idp:DescribeUserPoolClient
+            Resource: !Sub arn:aws:cognito-idp:${AWS::Region}:${AWS::AccountId}:userpool/${UserPoolPipelines}
+      Environment:
+        Variables:
+          USER_POOL_ID: !Ref UserPoolPipelines
+          USER_POOL_CLIENT_ID: !Ref UserPoolClientPipelines
+          TOKEN_ENDPOINT: !Sub "https://${Domain}.auth.${AWS::Region}.amazoncognito.com/oauth2/token"
+          API_ENDPOINT: !Sub "https://${Api}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+
 Outputs:
+
+  UserPoolId:
+    Description: "Cognito User Pool ID"
+    Value: !Ref UserPoolPipelines
+
+  UserPoolClientId:
+    Description: "Cognito User Pool Client ID that defines the Client ID and Client Secret"
+    Value: !Ref UserPoolClientPipelines
 
   ApiEndpoint:
     Description: "API Gateway endpoint URL for Prod stage"
@@ -106,10 +134,6 @@ Outputs:
     Description: "Cognito endpoint URL to get an access token"
     Value: !Sub "https://${Domain}.auth.${AWS::Region}.amazoncognito.com/oauth2/token"
 
-  UserPoolId:
-    Description: "Cognito User Pool ID"
-    Value: !Ref UserPoolPipelines
-
-  UserPoolClientId:
-    Description: "Cognito User Pool Client ID that defines the Client ID and Client Secret"
-    Value: !Ref UserPoolClientPipelines
+  MetadataFunctiion:
+    Description: "Name of the metadata function that returns Pipelines configuration"
+    Value: !Ref FunctionMetadata

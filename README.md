@@ -1,10 +1,10 @@
 # Quickbase Sentiment Analysis
 
-An AWS serverless app that provides a sentiment analysis capability to [Quickbase](https://www.quickbase.com/) through [Pipelines](https://help.quickbase.com/pipelines/about_quick_base_pipelines.html).
+An [AWS serverless app](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html) that provides a sentiment analysis capability to [Quickbase](https://www.quickbase.com/) through [Pipelines](https://help.quickbase.com/pipelines/about_quick_base_pipelines.html).
 
 ## Installation
 
-TODO
+Sign in to the AWS Management Console and deploy the [quickbase-sentiment-analysis](https://us-east-2.console.aws.amazon.com/lambda/home?region=us-east-2#/create/app?applicationId=arn:aws:serverlessrepo:us-east-2:791865881004:applications/quickbase-sentiment-anaalysis) app from the [Serverless Application Repository](https://aws.amazon.com/serverless/serverlessrepo/).
 
 ## Usage
 
