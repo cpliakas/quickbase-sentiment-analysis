@@ -23,6 +23,7 @@ Parameters:
   Domain:
     Type: String
     AllowedPattern: ^[a-z0-9](?:[a-z0-9\-]{0,61}[a-z0-9])?$
+    MinLength: 3
     Description: The Cognito User Pool domain, which is the prefix of the hostname used in the Pipelines Token URL setting.
 
 Globals:
