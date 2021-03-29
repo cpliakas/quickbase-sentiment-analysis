@@ -3,7 +3,6 @@
 APP_NAME ?= quickbase-sentiment-analysis
 APP_STAGE ?= $(USER)
 AWS_REGION ?= $(shell aws configure get region)
-AUTH_STACK_NAME ?= $(APP_NAME)-$(APP_STAGE)
 
 # Common values used throughout the Makefile, not intended to be configured.
 CODE_BUCKET = $(APP_NAME)-code-$(AWS_REGION)-$(APP_STAGE)
