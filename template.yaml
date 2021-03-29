@@ -134,6 +134,6 @@ Outputs:
     Description: "Cognito endpoint URL to get an access token"
     Value: !Sub "https://${Domain}.auth.${AWS::Region}.amazoncognito.com/oauth2/token"
 
-  MetadataFunctiion:
+  MetadataFunction:
     Description: "Name of the metadata function that returns Pipelines configuration"
     Value: !Ref FunctionMetadata

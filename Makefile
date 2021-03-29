@@ -34,9 +34,8 @@ deploy: package
 
 .PHONY: settings
 settings:
-	$(eval FUNC := $(shell aws cloudformation describe-stacks --query "Stacks[0].Outputs[?OutputKey=='MetadataFunctiion'].OutputValue | [0]" --output text --stack-name $(STACK_NAME)))
-	aws lambda invoke --function-name $(FUNC) settings.json > /dev/null
-	$(info pipelines settings written to ./settings.json file)
+	$(eval FUNC := $(shell aws cloudformation describe-stacks --query "Stacks[0].Outputs[?OutputKey=='MetadataFunction'].OutputValue | [0]" --output text --stack-name $(STACK_NAME)))
+	aws lambda invoke --function-name $(FUNC) settings.json
 
 .PHONY: publish
 publish: package
