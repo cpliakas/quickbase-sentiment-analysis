@@ -68,7 +68,7 @@ First, install the prerequisites below:
 * [SAM CLI](https://aws.amazon.com/serverless/sam/)
 * [jq](https://stedolan.github.io/jq/) (optional)
 
-The project includes a [Makefile](Makefile) to set up, deploy, and teardown the application. Reference the targets in Makefile as documentation for underlying commands.
+The project includes a [Makefile](Makefile) to set up, deploy, and teardown the application. Reference the targets in the `Makefile` as documentation for underlying commands.
 
 First, clone the repository.
 
@@ -103,6 +103,6 @@ make teardown
 
 The defaults are suitable for setting up a development environment. You can configure the `Makefile` by setting the following environment variables:
 
-* `APP_NAME`: The stack name prefix, defaults to `quickbase-sentiment-analysis`
-* `APP_STAGE`: The stack name suffix, defaults to the `USER` environment variable
+* `APP_NAME`: The CloudFormation stack name prefix, defaults to `quickbase-sentiment-analysis`
+* `APP_STAGE`: The CloudFormation stack name suffix, defaults to the `USER` environment variable
 * `AWS_REGION`: Defaults to the output of the `aws configure get region` command
