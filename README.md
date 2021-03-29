@@ -28,7 +28,7 @@ The output of the Lambda function should resemble the JSON below:
 
 ## Usage
 
-The serverless app provides an API that Pipelines consumes to detect sentiment. [Create a pipeline](https://help.quickbase.com/pipelines/creating_pipelines.html), and craft the json payload through the `Body` setting of the Webhooks Channel's `Make Request` action. An example of JSON payload that the API accepts is below:
+The serverless app provides an API that Pipelines consumes to detect sentiment. [Create a pipeline](https://help.quickbase.com/pipelines/creating_pipelines.html), and craft the json payload through the `Body` setting of the `Webhooks Channel`'s `Make Request` action. An example of JSON payload that the API accepts is below:
 
 ```json
 {
@@ -37,7 +37,7 @@ The serverless app provides an API that Pipelines consumes to detect sentiment. 
 }
 ```
 
-Let's say the Pipeline's Step `A` is the Quickbase channel's `Record Created` action. Assuming you have a field named `Comment` in the table in which the record was created, you might build the json above by configuring the `Body` setting in the `Make Request` action to `{{ {'text': a.comment,'language':'en'}|to_json }}`.
+Let's say the Pipeline's Step `A` is the `Quickbase` channel's `Record Created` action. Assuming you have a field named `Comment` in the table in which the record was created, you might build the json above by configuring the `Body` setting in the `Make Request` action to `{{ {'text': a.comment,'language':'en'}|to_json }}`.
 
 On success, the API will return a response like the one below:
 
