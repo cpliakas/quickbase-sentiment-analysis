@@ -4,7 +4,7 @@ An [AWS serverless app](https://docs.aws.amazon.com/serverless-application-model
 
 ## Installation
 
-Sign in to the AWS Management Console and deploy the [quickbase-sentiment-analysis](https://us-east-2.console.aws.amazon.com/lambda/home?region=us-east-2#/create/app?applicationId=arn:aws:serverlessrepo:us-east-2:791865881004:applications/quickbase-sentiment-analysis) app from the [Serverless Application Repository](https://aws.amazon.com/serverless/serverlessrepo/).
+Sign in to the [AWS Management Console](https://aws.amazon.com/) and deploy the [quickbase-sentiment-analysis](https://us-east-2.console.aws.amazon.com/lambda/home?region=us-east-2#/create/app?applicationId=arn:aws:serverlessrepo:us-east-2:791865881004:applications/quickbase-sentiment-analysis) app from the [Serverless Application Repository](https://aws.amazon.com/serverless/serverlessrepo/).
 
 Once the app is installed, create a Pipeline and use the [Webhooks Channel](https://help.quickbase.com/pipelines/webhooks_channel.html)'s `Make Request` action to consume the sentiment analysis service.
 
