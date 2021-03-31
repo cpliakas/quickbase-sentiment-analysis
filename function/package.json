@@ -1,6 +1,6 @@
 {
   "name": "pipelines_example",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "An AWS serverless app that provides a sentiment analysis capability to Quickbase.",
   "main": "app.js",
   "repository": "https://github.com/cpliakas/quickbase-sentiment-analysis",
