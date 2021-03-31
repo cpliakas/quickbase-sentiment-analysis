@@ -13,6 +13,7 @@ exports.handler = async (event, context) => {
         DisableSslCertificateValidation: 'No',
         Url: process.env.API_ENDPOINT,
         Method: 'POST',
+        ContentType: 'Application/json',
         BodyExample: '{{ {\'text\': a.textfield}|to_json }}'
     }
 }
