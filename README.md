@@ -6,7 +6,7 @@ An [AWS serverless app](https://docs.aws.amazon.com/serverless-application-model
 
 View the [end-to-end walkthrough](https://www.youtube.com/watch?v=2QH7PNAFGTY) to install and configure everything needed to add sentiment analysis to your Quickbase applications.
 
-To install the Amazon services, sign in to the [AWS Management Console](https://aws.amazon.com/) and deploy the [quickbase-sentiment-analysis](https://us-east-2.console.aws.amazon.com/lambda/home?region=us-east-2#/create/app?applicationId=arn:aws:serverlessrepo:us-east-2:791865881004:applications/quickbase-sentiment-analysis) app from the [Serverless Application Repository](https://aws.amazon.com/serverless/serverlessrepo/). You may also take the steps detailed in the (Development)[#development] section to install the Amazon services using the SAM framework outside of the Serverless Application Repository model.
+To install the Amazon services, sign in to the [AWS Management Console](https://aws.amazon.com/) and deploy the [quickbase-sentiment-analysis](https://us-east-2.console.aws.amazon.com/lambda/home?region=us-east-2#/create/app?applicationId=arn:aws:serverlessrepo:us-east-2:791865881004:applications/quickbase-sentiment-analysis) app from the [Serverless Application Repository](https://aws.amazon.com/serverless/serverlessrepo/). You may also take the steps detailed in the [Development](#development) section to install the Amazon services using the SAM framework outside of the Serverless Application Repository model.
 
 Quickbase requires [basic schema](https://help.quickbase.com/user-assistance/adding_child_databases.html) and a [Pipeline](https://help.quickbase.com/pipelines/creating_pipelines.html) as detailed in the end-to-end walkthrough video.
 
