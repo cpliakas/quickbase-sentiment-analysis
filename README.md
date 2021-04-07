@@ -4,27 +4,11 @@ An [AWS serverless app](https://docs.aws.amazon.com/serverless-application-model
 
 ## Installation
 
-Sign in to the [AWS Management Console](https://aws.amazon.com/) and deploy the [quickbase-sentiment-analysis](https://us-east-2.console.aws.amazon.com/lambda/home?region=us-east-2#/create/app?applicationId=arn:aws:serverlessrepo:us-east-2:791865881004:applications/quickbase-sentiment-analysis) app from the [Serverless Application Repository](https://aws.amazon.com/serverless/serverlessrepo/).
+View the [end-to-end walkthrough](https://www.youtube.com/watch?v=2QH7PNAFGTY) to install and configure everything needed to add sentiment analysis to your Quickbase applications.
 
-Once the app is installed, create a Pipeline and use the [Webhooks Channel](https://help.quickbase.com/pipelines/webhooks_channel.html)'s `Make Request` action to consume the sentiment analysis service.
+To install the Amazon services, sign in to the [AWS Management Console](https://aws.amazon.com/) and deploy the [quickbase-sentiment-analysis](https://us-east-2.console.aws.amazon.com/lambda/home?region=us-east-2#/create/app?applicationId=arn:aws:serverlessrepo:us-east-2:791865881004:applications/quickbase-sentiment-analysis) app from the [Serverless Application Repository](https://aws.amazon.com/serverless/serverlessrepo/). You may also take the steps detailed in the (Development)[#development] section to install the Amazon services using the SAM framework outside of the Serverless Application Repository model.
 
-To get the settings required by the action, either log into the AWS Management Console and run the Lambda function with a name containing `FunctionMetadata`, or run the [settings.sh](settings.sh) script to invoke the Lambda function via the command line which downloads the settings to the `./settings.json` file. Please note that the `settings.sh` script requires the [AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/installing.html).
-
-The output of the Lambda function should resemble the JSON below:
-
-```json
-{
-  "Authentication": "OAuth 2.0 Client Credentials",
-  "Username": "6rg9******************bqll",
-  "Password": "1k23********************************************ofs0",
-  "TokenUrl": "https://example-domain.auth.us-east-2.amazoncognito.com/oauth2/token",
-  "OauthCredentialsPlacement": "Header",
-  "DisableSslCertificateValidation": "No",
-  "Url": "https://abcdefghij.execute-api.us-east-2.amazonaws.com/Prod/",
-  "Method": "POST",
-  "BodyExample": "{{ {'text': a.textfield}|to_json }}"
-}
-```
+Quickbase requires [basic schema](https://help.quickbase.com/user-assistance/adding_child_databases.html) and a [Pipeline](https://help.quickbase.com/pipelines/creating_pipelines.html) as detailed in the end-to-end walkthrough video.
 
 ## Usage
 
