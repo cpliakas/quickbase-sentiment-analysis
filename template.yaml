@@ -15,7 +15,7 @@ Metadata:
       - sentiment
       - comprehend
     HomePageUrl: https://github.com/cpliakas/quickbase-sentiment-analysis
-    SemanticVersion: 0.2.1
+    SemanticVersion: 1.0.0
     SourceCodeUrl: https://github.com/cpliakas/quickbase-sentiment-analysis
 
 Parameters:
